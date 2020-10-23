@@ -5,6 +5,25 @@ using System.Threading;
 using Pathfinding;
 namespace TestCode
 {
+
+    class Cell : IEquatable<Cell>
+    {
+        public int col;
+        public int row;
+        public bool isWalkable;
+        public float F { get { return G + H; } }
+        public float G;
+        public float H;
+        public Cell parent;
+
+        public bool Equals(Cell other)
+        {
+            if (other.col == col && other.row == row)
+                return true;
+            else
+                return false;
+        }
+    }
     class Program
     {
         //static void Main(string[] args)
@@ -97,24 +116,7 @@ namespace TestCode
         static List<Cell> pathList;
         static int col;
         static int row;
-        class Cell:IEquatable<Cell>
-        {
-            public int col;
-            public int row;
-            public bool isWalkable;
-            public float F { get { return G + H; } }
-            public float G;
-            public float H;
-            public Cell parent;
-
-            public bool Equals(Cell other)
-            {
-                if (other.col == col && other.row == row)
-                    return true;
-                else
-                    return false;
-            }
-        }
+        
         static void Main(string[] args)
         {
             if (args.Length > 1)
@@ -153,8 +155,8 @@ namespace TestCode
             }
 
             Cell startCell = new Cell();
-            startCell.col = 0;
-            startCell.row = 0;
+            startCell.col = 49;
+            startCell.row = 30;
             Cell endCell = new Cell();
             endCell.col = col -1;
             endCell.row = row -1;
@@ -190,9 +192,9 @@ namespace TestCode
             {
                 for (int j = 0; j < mapPoint[i].Length; j++)
                 {
-                    if (i <= row - 2 && j == col/2) mapPoint[i][j].isWalkable = false;
-                    if (i == row - row/2 && j <= col/2 && j!= 0) mapPoint[i][j].isWalkable = false;
-
+                    if (i <= row - 2 && j == col / 2) mapPoint[i][j].isWalkable = false;
+                    if (i == row - row / 2 && j <= col / 2 && j != 0) mapPoint[i][j].isWalkable = false;
+                    if (i <= row / 2 && i != 0 && j == row / 2 - 2) mapPoint[i][j].isWalkable = false;
                 }
             }
 
@@ -214,11 +216,12 @@ namespace TestCode
             //    Console.WriteLine();
             //}
             pathList = new List<Cell>();
+
             DateTime start, end;
             start = DateTime.Now;
-            Cell path = FindPath(startCell, endCell);
-
-            while(true)
+            Cell path = FindPath(startCell, endCell,out int loopCount);
+            end = DateTime.Now;
+            while (true)
             {
                 if(path.col == startCell.col && path.row == startCell.row)
                 {
@@ -232,53 +235,69 @@ namespace TestCode
                     path = path.parent;
                 }
             }
-            end = DateTime.Now;
+            
+            Console.WriteLine();
+            Console.WriteLine();
+            //Console.WriteLine("openList");
 
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            // PrintPath();
+            //foreach (var item in oolist)
+            //{
+            //    Console.WriteLine("[{0}] ", item.F);
+            //}
+            //Console.WriteLine("closeList");
+            //foreach (var item in oclist)
+            //{
+            //    Console.WriteLine("[{0}] ", item.F);
+            //}
+
+            PrintPath();
             TimeSpan span = new TimeSpan(end.Ticks - start.Ticks);
             Console.WriteLine();
+            Console.WriteLine(loopCount);
             Console.WriteLine("---------------");
             Console.WriteLine("在 {0} X {1} 的地图中找到路径", col, row);
             Console.WriteLine(span.Minutes + " 分 " + span.Seconds + " 秒 " + span.Milliseconds + " 毫秒 ");
             Console.ReadLine();
         }
 
-        static Cell FindPath(Cell start,Cell end)
+        static Cell FindPath(Cell start,Cell end,out int loopCount)
         {
-            openList.Add(start);
+            loopCount = 0;
+            openList.Add(start);         
             while (openList.Count > 0)
-            {
+            {              
                 Cell current = GetLeastCell();
                 openList.Remove(current);
                 closeList.Add(current);
                 closeMark[current.row][current.col] = true;
+                
                 foreach (var item in GetSurround(current))
-                {
+                {                   
                     if (closeMark[item.row][item.col])
                     {
                         continue;
-
                     }
-                    if(!openMark[item.row][item.col])
+                    loopCount++;
+                    if (!openMark[item.row][item.col])
                     {
                         item.parent = current;
                         item.G = CalcG(start, item);
                         item.H = CalcH(item, end);
                         openList.Add(item);
                         openMark[item.row][item.col] = true;
+                        closeMark[item.row][item.col] = true;
+                        
                     }
                     else
                     {
-                        float GCost = CalcG(current,item);
-                        if(GCost < current.G)
+                        float GCost = CalcG(start, item);
+                        if (GCost < current.G)
                         {
                             item.parent = current;
-                            item.G = CalcG(start, item);
+                            item.G = CalcG(start, item); 
                             item.H = CalcH(item, end);
                         }
+
                     }
 
                     if (item.col == end.col && item.row == end.row)
@@ -449,4 +468,27 @@ namespace TestCode
     //        }
     //    }
     //}
+
+
+    class BinaryHeap
+    {
+        List<Cell> items;
+        public Cell Root { get { return items[0]; } }
+
+        public void Push(Cell cell)
+        {
+
+        }
+
+        public void RemoveNode(Cell cell)
+        {
+
+        }
+
+        private void SiftUp(int index)
+        {
+
+        }
+
+    }
 }
