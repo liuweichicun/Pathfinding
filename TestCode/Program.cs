@@ -7,14 +7,10 @@ namespace TestCode
     {
         static void Main(string[] args)
         {
-            if(args.Length < 1)
-            {
-                return;
-            }
 
-            int row = int.Parse(args[0]);
+            int row = 20;
 
-            int col = int.Parse(args[1]);
+            int col = 20;
 
             MapPoints m = new MapPoints(0, 0, 1, 1, row, col);
             foreach (var item in m.m_mapPoints)
