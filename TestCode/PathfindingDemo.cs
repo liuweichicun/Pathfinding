@@ -51,7 +51,7 @@ namespace TestCode
                 {
                     Console.Write("[{0:D2},{1:D2}] <-", path.Col, path.Row);
                     pathList.Add(path);
-                    path = path.parent;
+                    path = path.Parent;
                 }
             }
 

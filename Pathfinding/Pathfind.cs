@@ -53,9 +53,9 @@ namespace Pathfinding
                     }
                     if (!openMark[item.Row][item.Col])
                     {
-                        item.parent = current;
-                        item.G = CalcG(start, item);
-                        item.H = CalcH(item, end);
+                        item.Parent = current;
+                        item.m_G = CalcG(start, item);
+                        item.m_H = CalcH(item, end);
                         m_openList.Add(item);
                         openMark[item.Row][item.Col] = true;
                         closeMark[item.Row][item.Col] = true;
@@ -64,11 +64,11 @@ namespace Pathfinding
                     else
                     {
                         float GCost = CalcG(start, item);
-                        if (GCost < current.G)
+                        if (GCost < current.m_G)
                         {
-                            item.parent = current;
-                            item.G = CalcG(start, item);
-                            item.H = CalcH(item, end);
+                            item.Parent = current;
+                            item.m_G = CalcG(start, item);
+                            item.m_H = CalcH(item, end);
                         }
 
                     }

@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Pathfinding
 {
     public class Map
     {
+        public static Map Instance;
+        public static Map GetMapInstance()
+        {
+            if (Instance == null)
+                throw new Exception("init first!");
+            else
+                return Instance;
+        }
+
         public Cell[][] mapCells;
         public int ColCount { set; get; }
         public int RowCount { set; get; }
@@ -25,6 +35,7 @@ namespace Pathfinding
                     mapCells[i][j].IsWalkable = true;
                 }
             }
+            Instance = this;
         }
     }
 }
