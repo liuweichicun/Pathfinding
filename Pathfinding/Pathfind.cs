@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Pathfinding
 {
+    /// <summary>
+    /// 寻路系统
+    /// </summary>
     public class Pathfind
     {
         private bool[][] openMark;
@@ -13,6 +16,10 @@ namespace Pathfinding
         private Map m_map;
         private List<Cell> m_openList;
         private List<Cell> m_closeList;
+        /// <summary>
+        /// 初始化寻路系统，在初始化寻路系统中，必须指定寻路系统中的地图
+        /// </summary>
+        /// <param name="map">必须指定的地图</param>
         public Pathfind(Map map)
         {
             if (map == null) return;
@@ -35,7 +42,12 @@ namespace Pathfinding
             }
             m_map = map;
         }
-
+        /// <summary>
+        /// 寻路方法
+        /// </summary>
+        /// <param name="start">寻路的起点</param>
+        /// <param name="end">寻路的终点</param>
+        /// <returns>返回一个Cell，这个Cell为终点Cell，其中的Parent变量指向上一个节点</returns>
         public Cell FindPath(Cell start,Cell end)
         {
             m_openList.Add(start);
