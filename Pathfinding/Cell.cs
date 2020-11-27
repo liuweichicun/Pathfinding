@@ -21,13 +21,14 @@ namespace Pathfinding
         /// 当前Cell是否可走
         /// </summary>
         public bool IsWalkable { set; get; }
-        public float F { get { return m_G + m_H; } }
-        public float m_G;
-        public float m_H;
+        internal float F { get { return m_G + m_H; } }
+        internal float m_G;
+        internal float m_H;
         /// <summary>
         /// 上一个节点
         /// </summary>
         public Cell Parent { get; set; }
+
         public bool Equals(Cell other)
         {
             if (other.Col == Col && other.Row == Row)

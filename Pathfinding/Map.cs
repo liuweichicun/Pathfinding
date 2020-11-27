@@ -11,18 +11,6 @@ namespace Pathfinding
     public class Map
     {
         /// <summary>
-        /// 寻路系统地图静态实例
-        /// </summary>
-        public static Map Instance;
-        public static Map GetMapInstance()
-        {
-            if (Instance == null)
-                throw new Exception("init first!");
-            else
-                return Instance;
-        }
-
-        /// <summary>
         /// 寻路系统中地图Cell
         /// </summary>
         public Cell[][] mapCells;
@@ -55,7 +43,37 @@ namespace Pathfinding
                     mapCells[i][j].IsWalkable = true;
                 }
             }
-            Instance = this;
+        }
+
+
+        /// <summary>
+        /// 将障碍物注册到 NavMap 中
+        /// </summary>
+        /// <param name="obs">要注册的障碍物</param>
+        public void RegisteObstacleInNavMap(Obstacle obs)
+        {
+            ObstacleStateChage(obs, false);
+        }
+
+        
+        /// <summary>
+        /// 将障碍物从 NavMap 中取消注册
+        /// </summary>
+        /// <param name="obs">要取消注册的障碍物</param>
+        public void UnRegisteObstacleInNavMap (Obstacle obs)
+        {
+            ObstacleStateChage(obs, true);
+        }
+
+        private void ObstacleStateChage(Obstacle obs,bool state)
+        {
+            for (int i = obs.StartRow; i < obs.OccupyRow; i++)
+            {
+                for (int j = obs.StartCol; j < obs.OccupyCol; j++)
+                {
+                    mapCells[i][j].IsWalkable = state;
+                }
+            }
         }
     }
 }

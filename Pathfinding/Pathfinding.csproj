@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\Workspace\VisualStudio\PathFinding\Pathfinding\Pathfinding\Pathfinding.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

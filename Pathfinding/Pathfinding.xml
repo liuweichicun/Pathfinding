@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pathfinding</name>
+    </assembly>
+    <members>
+        <member name="T:Pathfinding.Cell">
+            <summary>
+            寻路系统中的Cell
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Cell.Col">
+            <summary>
+            当前Cell的行下标
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Cell.Row">
+            <summary>
+            当前Cell的列下标
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Cell.IsWalkable">
+            <summary>
+            当前Cell是否可走
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Cell.Parent">
+            <summary>
+            上一个节点
+            </summary>
+        </member>
+        <member name="T:Pathfinding.Map">
+            <summary>
+            寻路系统中的Map
+            </summary>
+        </member>
+        <member name="F:Pathfinding.Map.mapCells">
+            <summary>
+            寻路系统中地图Cell
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Map.ColCount">
+            <summary>
+            初始化寻路系统中地图要指定的行
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Map.RowCount">
+            <summary>
+            初始化寻路系统中地图要指定的列
+            </summary>
+        </member>
+        <member name="M:Pathfinding.Map.#ctor(System.Int32,System.Int32)">
+            <summary>
+            初始化寻路系统中的地图
+            </summary>
+            <param name="colCount">初始化的行数</param>
+            <param name="rowCount">初始化的列数</param>
+        </member>
+        <member name="M:Pathfinding.Map.RegisteObstacleInNavMap(Pathfinding.Obstacle)">
+            <summary>
+            将障碍物注册到 NavMap 中
+            </summary>
+            <param name="obs">要注册的障碍物</param>
+        </member>
+        <member name="M:Pathfinding.Map.UnRegisteObstacleInNavMap(Pathfinding.Obstacle)">
+            <summary>
+            将障碍物从 NavMap 中取消注册
+            </summary>
+            <param name="obs">要取消注册的障碍物</param>
+        </member>
+        <member name="T:Pathfinding.Obstacle">
+            <summary>
+            寻路系统中放置后不可行走的物体
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Obstacle.StartCol">
+            <summary>
+            起始行下标
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Obstacle.StartRow">
+            <summary>
+            起始列下标
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Obstacle.OccupyCol">
+            <summary>
+            行占据数量
+            </summary>
+        </member>
+        <member name="P:Pathfinding.Obstacle.OccupyRow">
+            <summary>
+            列占据数量
+            </summary>
+        </member>
+        <member name="M:Pathfinding.Obstacle.RegisterInMap(Pathfinding.Map)">
+            <summary>
+            在地图中注册位置，注册后寻路系统中的Cell标记为不可行走
+            </summary>
+            <param name="map">要注册的地图</param>
+        </member>
+        <member name="M:Pathfinding.Obstacle.UnRegisterInMap">
+            <summary>
+            在地图中取消注册，取消注册后寻路系统中的Cell标记为可行走
+            </summary>
+        </member>
+        <member name="T:Pathfinding.Pathfind">
+            <summary>
+            寻路系统
+            </summary>
+        </member>
+        <member name="M:Pathfinding.Pathfind.#ctor(Pathfinding.Map)">
+            <summary>
+            初始化寻路系统，在初始化寻路系统中，必须指定寻路系统中的地图
+            </summary>
+            <param name="map">必须指定的地图</param>
+        </member>
+        <member name="M:Pathfinding.Pathfind.FindPath(Pathfinding.Cell,Pathfinding.Cell)">
+            <summary>
+            寻路方法
+            </summary>
+            <param name="start">寻路的起点</param>
+            <param name="end">寻路的终点</param>
+            <returns>返回一个Cell，这个Cell为终点Cell，其中的Parent变量指向上一个节点</returns>
+        </member>
+    </members>
+</doc>
