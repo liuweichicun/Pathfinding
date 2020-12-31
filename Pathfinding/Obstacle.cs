@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pathfinding
+﻿namespace Pathfinding
 {
     /// <summary>
     /// 寻路系统中放置后不可行走的物体
@@ -59,9 +55,7 @@ namespace Pathfinding
                         m_map.mapCells[i][j].IsWalkable = true;
                     }
                 }
-                m_map = null;
             }
-            
         }
 
     }

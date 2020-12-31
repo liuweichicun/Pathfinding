@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Pathfinding
 {
@@ -50,6 +49,25 @@ namespace Pathfinding
         /// <returns>返回一个Cell，这个Cell为终点Cell，其中的Parent变量指向上一个节点</returns>
         public Cell FindPath(Cell start,Cell end)
         {
+            // 重置地图状态
+            if(m_openList.Count > 0)
+            {
+                m_openList.Clear();
+            }
+            if(m_closeList.Count > 0)
+            {
+                m_closeList.Clear();
+            }
+            for (int i = 0; i < m_map.RowCount; i++)
+            {
+                for (int j = 0; j < m_map.ColCount; j++)
+                {
+                    closeMark[i][j] = false;
+                    openMark[i][j] = false;
+                    costF[i][j] = -1;
+                }
+            }
+
             m_openList.Add(start);
             while (m_openList.Count > 0)
             {

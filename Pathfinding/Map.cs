@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-
-namespace Pathfinding
+﻿namespace Pathfinding
 {
     /// <summary>
     /// 寻路系统中的Map
@@ -67,9 +62,9 @@ namespace Pathfinding
 
         private void ObstacleStateChage(Obstacle obs,bool state)
         {
-            for (int i = obs.StartRow; i < obs.OccupyRow; i++)
+            for (int i = obs.StartRow; i < obs.StartRow + obs.OccupyRow; i++)
             {
-                for (int j = obs.StartCol; j < obs.OccupyCol; j++)
+                for (int j = obs.StartCol; j < obs.StartCol + obs.OccupyCol; j++)
                 {
                     mapCells[i][j].IsWalkable = state;
                 }

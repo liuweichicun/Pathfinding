@@ -9,12 +9,12 @@
             寻路系统中的Cell
             </summary>
         </member>
-        <member name="P:Pathfinding.Cell.Col">
+        <member name="F:Pathfinding.Cell.Col">
             <summary>
             当前Cell的行下标
             </summary>
         </member>
-        <member name="P:Pathfinding.Cell.Row">
+        <member name="F:Pathfinding.Cell.Row">
             <summary>
             当前Cell的列下标
             </summary>
@@ -28,6 +28,25 @@
             <summary>
             上一个节点
             </summary>
+        </member>
+        <member name="M:Pathfinding.Cell.#ctor">
+            <summary>
+            default custructor
+            </summary>
+        </member>
+        <member name="M:Pathfinding.Cell.#ctor(System.Int32,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="col"></param>
+            <param name="row"></param>
+        </member>
+        <member name="M:Pathfinding.Cell.Equals(Pathfinding.Cell)">
+            <summary>
+            判等函数
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
         </member>
         <member name="T:Pathfinding.Map">
             <summary>
